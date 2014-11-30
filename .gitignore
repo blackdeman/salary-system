@@ -1,0 +1,4 @@
+# Ignore-list
+
+# Ingnoring build folder 
+/target/*
