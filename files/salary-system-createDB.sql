@@ -11,8 +11,19 @@ USE `salary_system` ;
 CREATE TABLE IF NOT EXISTS `salary_system`.`DEPARTMENT_TBL` (
   `department_id` INT NOT NULL,
   `name` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`name`),
-  UNIQUE INDEX `department_id_UNIQUE` (`department_id` ASC))
+  PRIMARY KEY (`department_id`),
+  UNIQUE INDEX `name_UNIQUE` (`name` ASC))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `salary_system`.`ROLE_TBL`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `salary_system`.`ROLE_TBL` (
+  `role_id` INT NOT NULL,
+  `name` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`role_id`),
+  UNIQUE INDEX `name_UNIQUE` (`name` ASC))
 ENGINE = InnoDB;
 
 
@@ -22,12 +33,19 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `salary_system`.`USER_TBL` (
   `username` VARCHAR(45) NOT NULL,
   `password` VARCHAR(45) NOT NULL,
-  `department_id` INT NOT NULL,
+  `role_id` INT NOT NULL,
+  `department_id` INT NULL DEFAULT NULL,
   PRIMARY KEY (`username`),
   INDEX `fk_USER_TBL_DEPARTMENT_TBL1_idx` (`department_id` ASC),
+  INDEX `fk_USER_TBL_ROLE_TBL1_idx` (`role_id` ASC),
   CONSTRAINT `fk_USER_TBL_DEPARTMENT_TBL1`
     FOREIGN KEY (`department_id`)
     REFERENCES `salary_system`.`DEPARTMENT_TBL` (`department_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_USER_TBL_ROLE_TBL1`
+    FOREIGN KEY (`role_id`)
+    REFERENCES `salary_system`.`ROLE_TBL` (`role_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -45,7 +63,13 @@ CREATE TABLE IF NOT EXISTS `salary_system`.`EMPLOYEE_TBL` (
   `post` VARCHAR(45) NULL,
   `payway` INT NOT NULL,
   `department_id` INT NOT NULL,
-  PRIMARY KEY (`employee_id`))
+  PRIMARY KEY (`employee_id`),
+  INDEX `fk_EMPLOYEE_TBL_DEPARTMENT_TBL1_idx` (`department_id` ASC),
+  CONSTRAINT `fk_EMPLOYEE_TBL_DEPARTMENT_TBL1`
+    FOREIGN KEY (`department_id`)
+    REFERENCES `salary_system`.`DEPARTMENT_TBL` (`department_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
