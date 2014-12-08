@@ -1,11 +1,16 @@
-use salary_system;
+﻿use salary_system;
 
 INSERT  INTO `department_tbl`(`department_id`,`name`) VALUES
-  (2001,'ALL'),
-  (2002,'отдел кадров'),
-  (2003,'отдел продаж'); 
+  (2001,'personnel department'),
+  (2002,'sales department'); 
 
-INSERT  INTO `user_tbl`(`username`,`password`,`department_id`) VALUES
-  ('admin','admin',2001),
-  ('account1','account',2002),
-  ('account2','account',2003); 
+INSERT  INTO `role_tbl`(`role_id`,`name`) VALUES
+  (1001,'admin'),
+  (1002,'accountant'); 
+
+INSERT  INTO `user_tbl`(`username`,`password`,`role_id`) VALUES
+  ('admin','admin',1001);
+
+INSERT  INTO `user_tbl`(`username`,`password`,`role_id`,`department_id`) VALUES
+  ('account1','account',1002,2001),
+  ('account2','account',1002,2002);
