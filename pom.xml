@@ -95,18 +95,16 @@
                 <configuration>
                     <glassfishDirectory>${local.glassfish.home}</glassfishDirectory>
                     <user>${local.glassfish.user}</user>
-                    <passwordFile>${local.glassfish.passfile}</passwordFile>
+                    <adminPassword>${local.glassfish.adminPassword}</adminPassword>                               
                     <autoCreate>true</autoCreate>
                     <debug>true</debug>
                     <echo>true</echo>
                     <terse>true</terse>
                     <domain>
                         <name>${local.glassfish.domain}</name>
-                        <adminPort>4848</adminPort>
-                        <httpPort>8080</httpPort>
-                        <httpsPort>8181</httpsPort>
-                        <iiopPort>3700</iiopPort>
-                        <jmsPort>7676</jmsPort>
+                        <adminPort>${local.glassfish.adminPort}</adminPort>
+                        <httpPort>${local.glassfish.httpPort}</httpPort>
+                        <httpsPort>${local.glassfish.httpsPort}</httpsPort>                       
                         <reuse>false</reuse>
                     </domain>
                     <components>

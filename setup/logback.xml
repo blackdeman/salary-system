@@ -1,0 +1,32 @@
+<configuration debug="true" scan="true" scanPeriod="60 seconds">
+  <!-- debug="true" - print logback's configuration into log -->
+  <!-- scan="true" - reload configuration automatically when the file is changed -->
+
+  <contextName>salary</contextName>
+  <jmxConfigurator />
+
+  <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${com.sun.aas.instanceRoot}/logs/main.log</file>
+    <append>true</append>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>${com.sun.aas.instanceRoot}/logs/main-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+      <maxHistory>180</maxHistory>
+      <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+        <maxFileSize>100MB</maxFileSize>
+      </timeBasedFileNamingAndTriggeringPolicy>
+    </rollingPolicy>
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{40} - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <root>
+    <level value="INFO" />
+    <appender-ref ref="FILE" />
+  </root>
+
+  <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+    <resetJUL>true</resetJUL>
+  </contextListener>
+
+</configuration>

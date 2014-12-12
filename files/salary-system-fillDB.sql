@@ -1,4 +1,4 @@
-﻿use salary_system;
+USE `salary_system`;
 
 INSERT  INTO `department_tbl`(`department_id`,`name`) VALUES
   (2001,'personnel department'),

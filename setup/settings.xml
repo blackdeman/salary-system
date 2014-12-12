@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" 
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+    <profiles>
+        <profile>
+            <id>glassfish.domain.dreamteam.salary</id>            
+            <properties>
+                <local.glassfish.home>C:\\dev\\glassfish4\\glassfish</local.glassfish.home>
+                <local.glassfish.user>admin</local.glassfish.user>
+                <local.glassfish.adminPassword>admin</local.glassfish.adminPassword>
+                <local.glassfish.domain>salary</local.glassfish.domain>   
+                <local.glassfish.adminPort>14848</local.glassfish.adminPort>            
+                <local.glassfish.httpPort>18080</local.glassfish.httpPort>            
+                <local.glassfish.httpsPort>18181</local.glassfish.httpsPort>                                     
+            </properties>
+        </profile>
+    </profiles>    
+    
+    <activeProfiles>
+        <activeProfile>glassfish.domain.dreamteam.salary</activeProfile>
+    </activeProfiles>
+</settings>
