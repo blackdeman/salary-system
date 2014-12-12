@@ -1,0 +1,1 @@
+grant all privileges on salary_system.* to salary@"localhost" identified by 'salary';
