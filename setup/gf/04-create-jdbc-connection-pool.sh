@@ -15,5 +15,5 @@ create-jdbc-connection-pool \
 --failconnection=true \
 --allownoncomponentcallers=false \
 --nontransactionalconnections=false \
---property "user=salary:password=salary:URL=jdbc\:mysql\://${mysql_host}\:3306/salary_system" \
+--property "user=salary:password=salary:URL=jdbc\:mysql\://${mysql_host}\:3306/salary_system:driverClass=com.mysql.jdbc.Driver" \
 salaryPool
