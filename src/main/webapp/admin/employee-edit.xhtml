@@ -5,12 +5,11 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core">
     <ui:composition template="../WEB-INF/base_page.xhtml">
+        <ui:param name="title" value="Employee Edit" />
         <ui:define name="content">
-            <h:form>
-                <div class="container">
+            <h:form>                
                     <div class="row">
-                        <div class="col-md-12 col-sm-12">
-                            <h3> Edit employee </h3>
+                        <div class="col-md-12 col-sm-12">                            
                             <div class="form-group">
                                 <h:outputText value="Surname"/>
                                 <h:inputText class="form-control" value="#{employeeController.employee.surname}"/>
@@ -54,8 +53,7 @@
                                 <h:commandButton class="btn btn-default" action="#{employeeController.cancel}" immediate="true" value="Cancel"/>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    </div>              
             </h:form>
         </ui:define>
     </ui:composition>

@@ -7,14 +7,87 @@
     <h:head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
         <meta charset="utf-8" />
-        <title>Salary System</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-        <ui:include src="templates/commonCSS.xhtml" />
-        <ui:insert name="style" />       
+
+        <title>Salary System</title>        
+
+        <ui:include src="templates/commonCSS.xhtml" />    
+
+        <ui:insert name="style" />
+
+        <style>
+            a.navbar-logout {
+                text-shadow: 0 -1px 0 rgba(0, 0, 0, .25);
+                color: #9d9d9d;
+                padding: 15px;
+                line-height: 20px;
+                position: relative;
+                display: block;                    
+                text-decoration: none;
+                background-color: transparent;
+            }
+            a.navbar-logout:hover {
+                color: #fff;
+                text-decoration: none;
+            }
+            body {
+                padding-bottom: 40px;
+            }
+        </style>
     </h:head>
     <h:body>
-        <ui:insert name="content" />
+        <div id="top-nav" class="navbar navbar-inverse navbar-static-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-toggle"></span>
+                    </button>
+                    <h:link class="navbar-brand">Salary System</h:link>
+                </div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <h:link><i class="glyphicon glyphicon-user"></i> #{facesContext.externalContext.remoteUser}</h:link>                            
+                    </li>                        
+                    <li>                                                                                                  
+                        <h:form>                                
+                            <h:commandLink styleClass="navbar-logout" action="/login.faces?faces-redirect=true" actionListener="#{session.invalidate()}">
+                                <i class="glyphicon glyphicon-lock"></i> Logout                                    
+                            </h:commandLink>                           
+                        </h:form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-3">                     
+                    <h3><i class="glyphicon glyphicon-briefcase"></i> Toolbox</h3>
+                    <hr />
+                    <ul class="nav nav-stacked">
+                        <li><h:link>
+                                <i class="glyphicon glyphicon-plus"></i> Create Report</h:link></li>
+                        <li><h:link>
+                                <i class="glyphicon glyphicon-print"></i> Print Report</h:link></li>
+                        <li><h:link rendered="#{facesContext.externalContext.isUserInRole('ACCOUNTANT')}">
+                                <i class="glyphicon glyphicon-edit"></i> Edit Card</h:link></li>
+                        <li><h:link outcome="employee-list" rendered="#{facesContext.externalContext.isUserInRole('ACCOUNTANT')}">
+                                <i class="glyphicon glyphicon-wrench"></i> Edit Employee</h:link></li>
+                        <li><h:link rendered="#{facesContext.externalContext.isUserInRole('ACCOUNTANT')}">
+                                <i class="glyphicon glyphicon-euro"></i> Make Payment</h:link></li>        
+                    </ul>
+                    <hr />
+                </div>
+                <div class="col-md-9 col-sm-9">
+                    <h3>#{title}</h3>  
+                    <hr />
+                    <ui:insert name="content" />                     
+                </div>
+            </div>
+        </div>
+        <div class="navbar navbar-fixed-bottom" style="text-align: center;">This is project by <strong>Dream Team&copy;</strong></div>
+
         <ui:include src="templates/commonJS.xhtml" />
+
         <ui:insert name="script" />
     </h:body>
 </html>
