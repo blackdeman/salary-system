@@ -58,7 +58,7 @@
     <security-constraint>        
         <web-resource-collection>
             <web-resource-name>Protected Area</web-resource-name>          
-            <url-pattern>/admin/*</url-pattern>            
+            <url-pattern>/admin/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <role-name>ADMIN</role-name>
