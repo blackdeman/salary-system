@@ -18,6 +18,11 @@
         <welcome-file>admin/welcome.faces</welcome-file>
     </welcome-file-list>
 
+    <context-param>
+        <param-name>primefaces.THEME</param-name>
+        <param-value>bootstrap</param-value>
+    </context-param>
+
     <!-- JSF mapping -->
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
@@ -52,8 +57,8 @@
 
     <security-constraint>        
         <web-resource-collection>
-            <web-resource-name>Protected Admin Area</web-resource-name>          
-            <url-pattern>/admin/*</url-pattern>            
+            <web-resource-name>Protected Area</web-resource-name>          
+            <url-pattern>/admin/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <role-name>ADMIN</role-name>
