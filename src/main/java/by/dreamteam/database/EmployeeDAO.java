@@ -2,16 +2,18 @@ package by.dreamteam.database;
 
 import by.dreamteam.businessservices.entities.EmployeeList;
 import by.dreamteam.businessservices.entities.Employee;
+import javax.ejb.Stateless;
+import javax.persistence.Query;
 
 /**
  * @author Andrew
  * @version 1.0
  * @created 06-Dec-2014 3:35:01 PM
  */
-public class EmployeeDAO {
+@Stateless
+public class EmployeeDAO extends MainDAO {
 
     public EmployeeDAO() {
-
     }
 
     /**
@@ -24,12 +26,14 @@ public class EmployeeDAO {
     }
 
     public EmployeeList getEmployeeList() {
-        return null;
+        Query query = em.createNamedQuery("Employee.findAll");
+        return new EmployeeList(query.getResultList());
     }
 
     /**
      *
      * @param department
+     * @return 
      */
     public EmployeeList getEmployeeList(String department) {
         return null;
