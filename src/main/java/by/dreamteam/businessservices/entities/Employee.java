@@ -36,6 +36,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Employee.findByPost", query = "SELECT e FROM Employee e WHERE e.post = :post"),
     @NamedQuery(name = "Employee.findByPayway", query = "SELECT e FROM Employee e WHERE e.payway = :payway")})
 public class Employee implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -70,7 +71,7 @@ public class Employee implements Serializable {
     @JoinColumn(name = "department_id", referencedColumnName = "department_id")
     @ManyToOne(optional = false)
     private Department departmentId;
-
+    
     public Employee() {
         departmentId = new Department();
     }
@@ -139,6 +140,16 @@ public class Employee implements Serializable {
         return payway;
     }
 
+    public String getPaywayString() {
+        switch (payway) {
+            case 1:
+                return "on rate";
+            case 2:
+                return "hourly";
+        }
+        return "";
+    }
+
     public void setPayway(int payway) {
         this.payway = payway;
     }
@@ -172,5 +183,5 @@ public class Employee implements Serializable {
     public String toString() {
         return "by.dreamteam.businessservices.entities.Employee[ employeeId=" + employeeId + " ]";
     }
-    
+
 }

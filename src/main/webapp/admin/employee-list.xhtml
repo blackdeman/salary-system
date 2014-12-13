@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="../WEB-INF/base_page.xhtml">
+        <ui:define name="content">
+            <h:form>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <p:dataTable id="employeeList" value="#{employeeController.employeeList.list}" var="emp"
+                                     selectionMode="single" selection="#{employeeController.employee}" rowKey="#{emp.employeeId}"
+                                     rows="10"
+                                     paginator="true"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="5,10,20">
+                            <p:column headerText="Surname">
+                                <h:outputText value="#{emp.surname}"/>
+                            </p:column>
+                            <p:column headerText="Name">
+                                <h:outputText value="#{emp.name}"/>
+                            </p:column>
+                            <p:column headerText="Patronymic">
+                                <h:outputText value="#{emp.patronymic}"/>
+                            </p:column>
+                            <p:column headerText="Address">
+                                <h:outputText value="#{emp.address}"/>
+                            </p:column>
+                            <p:column headerText="Post">
+                                <h:outputText value="#{emp.post}"/>
+                            </p:column>
+                            <p:column headerText="Department">
+                                <h:outputText value="#{emp.departmentId.name}"/>
+                            </p:column>
+                            <p:column headerText="Payway">
+                                <h:outputText value="#{emp.paywayString}"/>
+                            </p:column>
+                        </p:dataTable>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="btn-toolbar">
+                            <h:commandButton class="btn btn-default" action="#{employeeController.addEmployee()}" value="Add Employee"/>
+                            <h:commandButton class="btn btn-default" action="#{employeeController.editEmployee()}" value="Edit Employee"/>
+                            <h:commandButton class="btn btn-default" action="#{employeeController.deleteEmployee()}" value="Delete Employee"/>
+                        </div>
+                    </div>
+                </div>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
+

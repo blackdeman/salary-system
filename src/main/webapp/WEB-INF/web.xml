@@ -15,7 +15,7 @@
 
     <!-- Welcome page -->
     <welcome-file-list>
-        <welcome-file>employee-list.faces</welcome-file>
+        <welcome-file>admin/welcome.faces</welcome-file>
     </welcome-file-list>
 
     <context-param>
@@ -48,7 +48,7 @@
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
 
-<!--    <security-constraint>
+    <security-constraint>
         <web-resource-collection>
             <web-resource-name>Public Resources</web-resource-name>
             <url-pattern>/javax.faces.resource/*</url-pattern>
@@ -57,7 +57,7 @@
 
     <security-constraint>        
         <web-resource-collection>
-            <web-resource-name>Protected Admin Area</web-resource-name>          
+            <web-resource-name>Protected Area</web-resource-name>          
             <url-pattern>/admin/*</url-pattern>            
         </web-resource-collection>
         <auth-constraint>
@@ -82,6 +82,6 @@
             <form-login-page>/login.faces</form-login-page>
             <form-error-page>/error.faces</form-error-page>
         </form-login-config>
-    </login-config>-->
+    </login-config>
     
 </web-app>
