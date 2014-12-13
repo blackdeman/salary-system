@@ -6,7 +6,8 @@
       xmlns:h="http://java.sun.com/jsf/html">
     <ui:composition template="/WEB-INF/base_page.xhtml">
         <ui:define name="content">
-            <h1> Welcome to Salary System! </h1>           
+            <h1> Welcome to Salary System! </h1>         
+            <h:outputText value="#{salarySystem.msg}" />
         </ui:define>
     </ui:composition>
 </html>
