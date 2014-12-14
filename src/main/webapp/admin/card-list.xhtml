@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:composition template="../WEB-INF/base_page.xhtml">
         <ui:param name="title" value="Employee Table" />
         <ui:define name="content">
@@ -18,8 +19,10 @@
                             <p:column headerText="Employee id">
                                 <h:outputText value="#{card.cardPK.employeeId}"/>
                             </p:column>
-                            <p:column headerText="Date">
-                                <h:outputText value="#{card.cardPK.date}"/>
+                            <p:column headerText="Date" sortBy="#{card.cardPK.date}">
+                                <h:outputText value="#{card.cardPK.date}">
+                                    <f:convertDateTime pattern="dd.MM.yyyy"/>
+                                </h:outputText>
                             </p:column>
                             <p:column headerText="Hours">
                                 <h:outputText value="#{card.hours}"/>
@@ -34,9 +37,9 @@
                 <div class="row">          
                     <div class="col-md-12 col-sm-12">
                         <div class="btn-toolbar">
-                            <h:commandButton class="btn btn-default" action="#{employeeController.addCard()}" value="Add"/>
-                            <h:commandButton class="btn btn-default" action="#{employeeController.editCard()}" value="Edit"/>
-                            <h:commandButton class="btn btn-default" action="#{employeeController.deleteCard()}" value="Delete"/>
+                            <h:commandButton class="btn btn-default" action="#{cardController.addCard()}" value="Add"/>
+                            <h:commandButton class="btn btn-default" action="#{cardController.editCard()}" value="Edit"/>
+                            <h:commandButton class="btn btn-default" action="#{cardController.deleteCard()}" value="Delete"/>
                         </div>               
                     </div>
                 </div>                

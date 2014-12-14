@@ -5,6 +5,7 @@ import by.dreamteam.businessservices.entities.EmployeeList;
 import by.dreamteam.businessservices.entities.Employee;
 import by.dreamteam.businessservices.entities.Card;
 import by.dreamteam.businessservices.entities.CardList;
+import by.dreamteam.businessservices.entities.CardPK;
 import by.dreamteam.database.CardDAO;
 import java.io.Serializable;
 import javax.ejb.EJB;
@@ -30,6 +31,7 @@ public class CardController implements Serializable {
 
     private CardList cardList;
     private Card card;
+    boolean isNew = false;
 
     public CardController() {
 
@@ -49,6 +51,8 @@ public class CardController implements Serializable {
 
     public void setEmployee(Employee employee) {
         this.employee = employee;
+        cardList = null;
+        setCard(null);
     }
 
     public String selectEmployee() {
@@ -79,27 +83,43 @@ public class CardController implements Serializable {
     }
 
     public String addCard() {
-        setCard(null);
+        isNew = true;
+        CardPK cpk = new CardPK();
+        cpk.setEmployeeId(getEmployee().getEmployeeId());
+        setCard(new Card(cpk));
         return "card-edit.xhtml";
     }
 
     public String editCard() {
+        isNew = false;
         return "card-edit.xhtml";
     }
-    
+
     public String deleteCard() {
-        return "card-list.xhtml?faces-redirect=true";
+        cardDAO.deleteCard(card);
+        cardList = null;
+        setCard(null);
+        return "card-list.xhtml";
     }
 
-    public void confrimCardChanges() {
-
+    public String confrimCardChanges() {
+        if (isNewCard()) {
+            cardDAO.addCard(card);
+        } else {
+            cardDAO.updateCard(getCard());
+        }
+        cardList = null;
+        setCard(null);
+        return "card-list.xhtml";
     }
 
-    public Card getCardForSelectedEmployee(Employee employee) {
-        return null;
+    public String cancel() {
+        cardList = null;
+        setCard(null);
+        return "card-list.xhtml";
     }
 
-    public void updateSelectedCard() {
-
+    public boolean isNewCard() {
+        return isNew;
     }
 }//end CardController
