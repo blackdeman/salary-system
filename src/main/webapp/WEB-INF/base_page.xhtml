@@ -13,8 +13,7 @@
 
         <ui:include src="templates/commonCSS.xhtml" />    
 
-        <ui:insert name="style" />
-
+        <ui:insert name="style" />        
         <style>
             a.navbar-logout {
                 text-shadow: 0 -1px 0 rgba(0, 0, 0, .25);
@@ -30,8 +29,19 @@
                 color: #fff;
                 text-decoration: none;
             }
-            body {
-                padding-bottom: 40px;
+            .navbar-static-top {
+                margin-bottom:20px;
+            }
+            i {
+                font-size:18px;
+            }
+            footer {
+                margin-top:20px;
+                padding-top:20px;
+                padding-bottom:20px;                
+            }
+            hr {
+                border-top-color: #e0e0e0;
             }
         </style>
     </h:head>
@@ -42,7 +52,7 @@
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="icon-toggle"></span>
                     </button>
-                    <h:link class="navbar-brand">Salary System</h:link>
+                    <h:link class="navbar-brand" outcome="/admin/welcome">Salary System</h:link>
                 </div>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
@@ -83,9 +93,9 @@
                     <ui:insert name="content" />                     
                 </div>
             </div>
-        </div>
-        <div class="navbar navbar-fixed-bottom" style="text-align: center;">This is project by <strong>Dream Team&copy;</strong></div>
+        </div>          
 
+        <footer class="text-center">This is project by <strong>DreamTeam&copy;</strong></footer>
         <ui:include src="templates/commonJS.xhtml" />
 
         <ui:insert name="script" />

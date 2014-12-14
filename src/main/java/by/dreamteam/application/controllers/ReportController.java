@@ -1,8 +1,8 @@
 package by.dreamteam.application.controllers;
-import by.dreamteam.database.EmployeeDAO;
-import by.dreamteam.database.ReportDAO;
 import by.dreamteam.businessservices.entities.Report;
+import by.dreamteam.database.ReportDAO;
 import java.util.Date;
+import javax.ejb.EJB;
 
 /**
  * @author dkaganovich
@@ -12,20 +12,17 @@ import java.util.Date;
 public class ReportController {
 
 	private Report report;
-	public SystemController m_SystemController;
-	public EmployeeDAO m_EmployeeDAO;
-	public ReportDAO m_ReportDAO;
+	
+        @EJB
+        ReportDAO reportDAO;
 
 	public ReportController(){
-
 	}
 
 	public void confirmReport(){
-
 	}
 
 	public void createReport(){
-
 	}
 
 	public Report getReport(){
@@ -37,7 +34,6 @@ public class ReportController {
 	 * @param report
 	 */
 	public void selectReport(Report report){
-
 	}
 
 	/**
@@ -45,7 +41,6 @@ public class ReportController {
 	 * @param department
 	 */
 	public void setDepartment(String department){
-
 	}
 
 	/**
@@ -53,7 +48,6 @@ public class ReportController {
 	 * @param endDate
 	 */
 	public void setEndDate(Date endDate){
-
 	}
 
 	/**
@@ -61,7 +55,6 @@ public class ReportController {
 	 * @param report
 	 */
 	public void setReport(Report report){
-
 	}
 
 	/**
@@ -69,6 +62,5 @@ public class ReportController {
 	 * @param startDate
 	 */
 	public void setStartDate(Date startDate){
-
 	}
 }//end ReportController

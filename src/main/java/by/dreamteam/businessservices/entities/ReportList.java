@@ -9,10 +9,13 @@ import java.util.List;
  */
 public class ReportList {
 
-	private List<Report> reportList;
+    private final List<Report> reportList;
 
-	public ReportList(){
+    public ReportList(List<Report> reportList) {
+        this.reportList = reportList;
+    }
 
-	}
-
+    public List<Report> getReportList() {
+        return reportList;
+    }
 }//end ReportList
