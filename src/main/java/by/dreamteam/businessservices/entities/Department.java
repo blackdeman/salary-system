@@ -5,7 +5,6 @@
  */
 package by.dreamteam.businessservices.entities;
 
-import by.dreamteam.businessservices.entities.User;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
@@ -35,9 +34,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Department.findByDepartmentId", query = "SELECT d FROM Department d WHERE d.departmentId = :departmentId"),
     @NamedQuery(name = "Department.findByName", query = "SELECT d FROM Department d WHERE d.name = :name")})
 public class Department implements Serializable {
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "departmentId")
-    private Collection<Report> reportCollection;
+
     private static final long serialVersionUID = 1L;
+    
     @Id
     @Basic(optional = false)
     @NotNull
@@ -50,6 +49,10 @@ public class Department implements Serializable {
     private String name;
     @OneToMany(mappedBy = "department")
     private List<User> userList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "departmentId")
+    private List<Employee> employeeList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "departmentId")
+    private List<Report> reportList;
 
     public Department() {
     }
@@ -114,12 +117,21 @@ public class Department implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Report> getReportCollection() {
-        return reportCollection;
+    public List<Employee> getEmployeeList() {
+        return employeeList;
     }
 
-    public void setReportCollection(Collection<Report> reportCollection) {
-        this.reportCollection = reportCollection;
+    public void setEmployeeList(List<Employee> employeeList) {
+        this.employeeList = employeeList;
     }
-    
+
+    @XmlTransient
+    public List<Report> getReportList() {
+        return reportList;
+    }
+
+    public void setReportList(List<Report> reportList) {
+        this.reportList = reportList;
+    }
+
 }
