@@ -3,28 +3,24 @@ package by.dreamteam.database;
 import by.dreamteam.businessservices.entities.Card;
 import by.dreamteam.businessservices.entities.CardList;
 import by.dreamteam.businessservices.entities.Employee;
+import javax.ejb.Stateless;
 
 /**
  * @author Andrew
  * @version 1.0
  * @created 06-Dec-2014 3:35:01 PM
  */
-public class CardDAO {
+@Stateless
+public class CardDAO extends MainDAO {
 
-    public CardDAO() {
-
-    }
 
     /**
      *
      * @param employee
+     * @return 
      */
-    public void getCard(Employee employee) {
-
-    }
-
-    public CardList getCardList() {
-        return null;
+    public CardList getCardList(Employee employee) {
+        return new CardList();
     }
 
     /**

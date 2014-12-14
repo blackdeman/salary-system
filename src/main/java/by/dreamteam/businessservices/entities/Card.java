@@ -50,6 +50,8 @@ public class Card implements Serializable {
     private Employee employee;
 
     public Card() {
+        this.cardPK = new CardPK();
+        this.employee = new Employee();
     }
 
     public Card(CardPK cardPK) {

@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="../WEB-INF/base_page.xhtml">
+        <ui:param name="title" value="Employee Table" />
+        <ui:define name="content">
+            <h:form>      
+                <div class="row">          
+                    <div class="col-md-12 col-sm-12">                                 
+                        <p:dataTable id="employeeList" value="#{cardController.cardList.list}" var="card"
+                                     selectionMode="single" selection="#{cardController.card}" rowKey="#{card.cardPK}"
+                                     rows="10"
+                                     paginator="true"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="5,10,20">
+                            <p:column headerText="Employee id">
+                                <h:outputText value="#{card.cardPK.employeeId}"/>
+                            </p:column>
+                            <p:column headerText="Date">
+                                <h:outputText value="#{card.cardPK.date}"/>
+                            </p:column>
+                            <p:column headerText="Hours">
+                                <h:outputText value="#{card.hours}"/>
+                            </p:column>
+                            <p:column headerText="Rate per hour">
+                                <h:outputText value="#{card.ratePerHour}"/>
+                            </p:column>
+                        </p:dataTable>    
+                    </div>
+                </div>
+                <br/>         
+                <div class="row">          
+                    <div class="col-md-12 col-sm-12">
+                        <div class="btn-toolbar">
+                            <h:commandButton class="btn btn-default" action="#{employeeController.addCard()}" value="Add"/>
+                            <h:commandButton class="btn btn-default" action="#{employeeController.editCard()}" value="Edit"/>
+                            <h:commandButton class="btn btn-default" action="#{employeeController.deleteCard()}" value="Delete"/>
+                        </div>               
+                    </div>
+                </div>                
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
