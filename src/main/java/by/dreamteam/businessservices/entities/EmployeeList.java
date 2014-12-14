@@ -28,7 +28,7 @@ public class EmployeeList {
 
     public Employee getEmployee(int i) {
         if (getList().size() > i) {
-            return employeeList.get(i);
+            return getList().get(i);
         }
         return null;
     }

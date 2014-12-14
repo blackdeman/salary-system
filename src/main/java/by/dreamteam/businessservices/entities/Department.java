@@ -5,10 +5,10 @@
  */
 package by.dreamteam.businessservices.entities;
 
-import by.dreamteam.businessservices.entities.User;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -33,6 +33,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Department.findByDepartmentId", query = "SELECT d FROM Department d WHERE d.departmentId = :departmentId"),
     @NamedQuery(name = "Department.findByName", query = "SELECT d FROM Department d WHERE d.name = :name")})
 public class Department implements Serializable {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "departmentId")
+    private List<Employee> employeeList;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -107,6 +109,15 @@ public class Department implements Serializable {
     @Override
     public String toString() {
         return "by.dreamteam.businessservices.entity.Department[ departmentId=" + departmentId + " ]";
+    }
+
+    @XmlTransient
+    public List<Employee> getEmployeeList() {
+        return employeeList;
+    }
+
+    public void setEmployeeList(List<Employee> employeeList) {
+        this.employeeList = employeeList;
     }
     
 }

@@ -9,11 +9,28 @@ import java.util.List;
  */
 public class CardList {
 
-	private List<Card> cardList;
-	public Card m_Card;
+    private List<Card> list;
 
-	public CardList(){
+    public CardList() {
+    }
 
-	}
+    public CardList(List<Card> list) {
+        this.list = list;
+    }
+
+    public List<Card> getList() {
+        return list;
+    }
+    
+    public Card getCard(int i) {
+        if (getList().size() > i) {
+            return getList().get(i);
+        }
+        return null;
+    }
+    
+    public int getSize() {
+        return getList().size();
+    }
 
 }//end CardList
