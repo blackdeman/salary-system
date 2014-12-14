@@ -43,7 +43,7 @@ public class Card implements Serializable {
     private int hours;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "rate per hour")
+    @Column(name = "rate_per_hour")
     private BigInteger ratePerHour;
     @JoinColumn(name = "employee_id", referencedColumnName = "employee_id", insertable = false, updatable = false)
     @ManyToOne(optional = false)

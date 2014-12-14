@@ -15,7 +15,7 @@
 
     <!-- Welcome page -->
     <welcome-file-list>
-        <welcome-file>admin/welcome.faces</welcome-file>
+        <welcome-file>admin/employee-list-selection.faces</welcome-file>
     </welcome-file-list>
 
     <context-param>

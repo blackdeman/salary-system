@@ -4,6 +4,7 @@ import by.dreamteam.businessservices.entities.Card;
 import by.dreamteam.businessservices.entities.CardList;
 import by.dreamteam.businessservices.entities.Employee;
 import javax.ejb.Stateless;
+import javax.persistence.Query;
 
 /**
  * @author Andrew
@@ -20,7 +21,9 @@ public class CardDAO extends MainDAO {
      * @return 
      */
     public CardList getCardList(Employee employee) {
-        return new CardList();
+        Query query = em.createNamedQuery("Card.findByEmployeeId");
+        query.setParameter("employeeId", employee.getEmployeeId());
+        return new CardList(query.getResultList());
     }
 
     /**

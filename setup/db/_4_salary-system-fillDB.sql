@@ -1,8 +1,8 @@
-USE `salary_system`;
+use salary_system;
 
 INSERT  INTO `department_tbl`(`department_id`,`name`) VALUES
   (2001,'personnel department'),
-  (2002,'sales department'); 
+  (2002,'sales department');
 
 INSERT  INTO `role_tbl`(`role_id`,`name`) VALUES
   (1001,'admin'),
@@ -21,3 +21,9 @@ INSERT  INTO `employee_tbl`(`employee_id`,`surname`,`name`,`patronymic`,`address
   (3002,'surname2','name2','patronymic2','address2','post2',1,2002),
   (3003,'surname3','name3','patronymic3','address3','post3',1,2001),
   (3004,'surname4','name4','patronymic4','address4','post4',1,2002);
+
+INSERT  INTO `card_tbl`(`employee_id`,`date`,`hours`,`rate_per_hour`) VALUES
+  (3001,'2014-10-22',8,40),
+  (3001,'2014-11-22',6,30),
+  (3001,'2014-11-21',6,30),
+  (3002,'2014-10-22',6,30);
