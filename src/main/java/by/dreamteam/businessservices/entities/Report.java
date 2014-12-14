@@ -34,7 +34,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Report.findAll", query = "SELECT r FROM Report r"),
     @NamedQuery(name = "Report.findByReportId", query = "SELECT r FROM Report r WHERE r.reportId = :reportId"),
     @NamedQuery(name = "Report.findByReportName", query = "SELECT r FROM Report r WHERE r.reportName = :reportName"),
-    @NamedQuery(name = "Report.findByMonthYear", query = "SELECT r FROM Report r WHERE r.monthYear = :monthYear"),
+    @NamedQuery(name = "Report.findByStartDate", query = "SELECT r FROM Report r WHERE r.startDate = :startDate"),
+    @NamedQuery(name = "Report.findByEndDate", query = "SELECT r FROM Report r WHERE r.endDate = :endDate"),
     @NamedQuery(name = "Report.findByAverageSalary", query = "SELECT r FROM Report r WHERE r.averageSalary = :averageSalary")})
 public class Report implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -50,9 +51,14 @@ public class Report implements Serializable {
     private String reportName;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "month_year")
+    @Column(name = "start_date")
     @Temporal(TemporalType.DATE)
-    private Date monthYear;
+    private Date startDate;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "end_date")
+    @Temporal(TemporalType.DATE)
+    private Date endDate;
     @Basic(optional = false)
     @NotNull
     @Column(name = "average_salary")
@@ -68,10 +74,11 @@ public class Report implements Serializable {
         this.reportId = reportId;
     }
 
-    public Report(Integer reportId, String reportName, Date monthYear, BigInteger averageSalary) {
+    public Report(Integer reportId, String reportName, Date startDate, Date endDate, BigInteger averageSalary) {
         this.reportId = reportId;
         this.reportName = reportName;
-        this.monthYear = monthYear;
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.averageSalary = averageSalary;
     }
 
@@ -91,12 +98,20 @@ public class Report implements Serializable {
         this.reportName = reportName;
     }
 
-    public Date getMonthYear() {
-        return monthYear;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setMonthYear(Date monthYear) {
-        this.monthYear = monthYear;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 
     public BigInteger getAverageSalary() {

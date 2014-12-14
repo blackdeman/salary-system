@@ -25,5 +25,12 @@ public class UserDAO extends MainDAO {
 
         return (User) query.getSingleResult();
     }
+    
+    public User getUserByUsername(String username) {
+        Query query = em.createNamedQuery("User.findByUsername");
+        query.setParameter("username", username);
+        
+        return (User) query.getSingleResult();
+    }
 
 }//end UserDAO

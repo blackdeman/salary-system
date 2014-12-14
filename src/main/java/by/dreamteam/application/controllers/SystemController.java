@@ -3,6 +3,7 @@ package by.dreamteam.application.controllers;
 import by.dreamteam.businessservices.entities.User;
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 /**
@@ -29,5 +30,5 @@ public class SystemController implements Serializable {
 
     public String getCurrentUserDepartment() {
         return user.getDepartment().getName();
-    }
+    }        
 }//end SystemController

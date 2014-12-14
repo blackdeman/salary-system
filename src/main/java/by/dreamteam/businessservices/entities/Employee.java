@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Andrew
+ * @author Dmitry Kaganovich
  */
 @Entity
 @Table(name = "employee_tbl")
@@ -40,9 +40,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Employee.findByPost", query = "SELECT e FROM Employee e WHERE e.post = :post"),
     @NamedQuery(name = "Employee.findByPayway", query = "SELECT e FROM Employee e WHERE e.payway = :payway")})
 public class Employee implements Serializable {
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee")
-    private List<Card> cardList;
-
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -74,12 +71,13 @@ public class Employee implements Serializable {
     @NotNull
     @Column(name = "payway")
     private int payway;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee")
+    private List<Card> cardList;
     @JoinColumn(name = "department_id", referencedColumnName = "department_id")
     @ManyToOne(optional = false)
     private Department departmentId;
-    
+
     public Employee() {
-        departmentId = new Department();
     }
 
     public Employee(Integer employeeId) {
@@ -146,18 +144,17 @@ public class Employee implements Serializable {
         return payway;
     }
 
-    public String getPaywayString() {
-        switch (payway) {
-            case 1:
-                return "on rate";
-            case 2:
-                return "hourly";
-        }
-        return "";
-    }
-
     public void setPayway(int payway) {
         this.payway = payway;
+    }
+
+    @XmlTransient
+    public List<Card> getCardList() {
+        return cardList;
+    }
+
+    public void setCardList(List<Card> cardList) {
+        this.cardList = cardList;
     }
 
     public Department getDepartmentId() {
@@ -182,21 +179,15 @@ public class Employee implements Serializable {
             return false;
         }
         Employee other = (Employee) object;
-        return !((this.employeeId == null && other.employeeId != null) || (this.employeeId != null && !this.employeeId.equals(other.employeeId)));
+        if ((this.employeeId == null && other.employeeId != null) || (this.employeeId != null && !this.employeeId.equals(other.employeeId))) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public String toString() {
         return "by.dreamteam.businessservices.entities.Employee[ employeeId=" + employeeId + " ]";
     }
-
-    @XmlTransient
-    public List<Card> getCardList() {
-        return cardList;
-    }
-
-    public void setCardList(List<Card> cardList) {
-        this.cardList = cardList;
-    }
-
+    
 }

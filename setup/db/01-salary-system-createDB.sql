@@ -93,7 +93,7 @@ CREATE TABLE IF NOT EXISTS `salary_system`.`CARD_TBL` (
   `employee_id` INT NOT NULL,
   `date` DATE NOT NULL,
   `hours` INT NOT NULL DEFAULT 0,
-  `rate per hour` DECIMAL(20) NOT NULL,
+  `rate_per_hour` DECIMAL(20) NOT NULL,
   PRIMARY KEY (`employee_id`, `date`),
   CONSTRAINT `fk_CARD_TBL_EMPLOYEE_TBL1`
     FOREIGN KEY (`employee_id`)
@@ -129,7 +129,8 @@ DROP TABLE IF EXISTS `salary_system`.`REPORT_TBL` ;
 CREATE TABLE IF NOT EXISTS `salary_system`.`REPORT_TBL` (
   `report_id` INT NOT NULL,
   `report_name` VARCHAR(45) NOT NULL,
-  `month_year` DATE NOT NULL,
+  `start_date` DATE NOT NULL,
+  `end_date` DATE NOT NULL,
   `average_salary` DECIMAL(20) NOT NULL DEFAULT 0,
   `department_id` INT NOT NULL,
   PRIMARY KEY (`report_id`),

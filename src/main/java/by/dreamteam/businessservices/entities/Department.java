@@ -6,7 +6,6 @@
 package by.dreamteam.businessservices.entities;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -24,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Andrew
+ * @author Dmitry Kaganovich
  */
 @Entity
 @Table(name = "department_tbl")
@@ -34,9 +33,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Department.findByDepartmentId", query = "SELECT d FROM Department d WHERE d.departmentId = :departmentId"),
     @NamedQuery(name = "Department.findByName", query = "SELECT d FROM Department d WHERE d.name = :name")})
 public class Department implements Serializable {
-
     private static final long serialVersionUID = 1L;
-    
     @Id
     @Basic(optional = false)
     @NotNull
@@ -47,12 +44,10 @@ public class Department implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "name")
     private String name;
-    @OneToMany(mappedBy = "department")
-    private List<User> userList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "departmentId")
-    private List<Employee> employeeList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "departmentId")
     private List<Report> reportList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "departmentId")
+    private List<Employee> employeeList;
 
     public Department() {
     }
@@ -83,12 +78,21 @@ public class Department implements Serializable {
     }
 
     @XmlTransient
-    public List<User> getUserList() {
-        return userList;
+    public List<Report> getReportList() {
+        return reportList;
     }
 
-    public void setUserList(List<User> userList) {
-        this.userList = userList;
+    public void setReportList(List<Report> reportList) {
+        this.reportList = reportList;
+    }
+
+    @XmlTransient
+    public List<Employee> getEmployeeList() {
+        return employeeList;
+    }
+
+    public void setEmployeeList(List<Employee> employeeList) {
+        this.employeeList = employeeList;
     }
 
     @Override
@@ -113,25 +117,7 @@ public class Department implements Serializable {
 
     @Override
     public String toString() {
-        return "by.dreamteam.businessservices.entity.Department[ departmentId=" + departmentId + " ]";
+        return "by.dreamteam.businessservices.entities.Department[ departmentId=" + departmentId + " ]";
     }
-
-    @XmlTransient
-    public List<Employee> getEmployeeList() {
-        return employeeList;
-    }
-
-    public void setEmployeeList(List<Employee> employeeList) {
-        this.employeeList = employeeList;
-    }
-
-    @XmlTransient
-    public List<Report> getReportList() {
-        return reportList;
-    }
-
-    public void setReportList(List<Report> reportList) {
-        this.reportList = reportList;
-    }
-
+    
 }

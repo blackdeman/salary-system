@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Andrew
+ * @author Dmitry Kaganovich
  */
 @Entity
 @Table(name = "card_tbl")
@@ -43,7 +43,7 @@ public class Card implements Serializable {
     private int hours;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "rate per hour")
+    @Column(name = "rate_per_hour")
     private BigInteger ratePerHour;
     @JoinColumn(name = "employee_id", referencedColumnName = "employee_id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
@@ -112,7 +112,10 @@ public class Card implements Serializable {
             return false;
         }
         Card other = (Card) object;
-        return !((this.cardPK == null && other.cardPK != null) || (this.cardPK != null && !this.cardPK.equals(other.cardPK)));
+        if ((this.cardPK == null && other.cardPK != null) || (this.cardPK != null && !this.cardPK.equals(other.cardPK))) {
+            return false;
+        }
+        return true;
     }
 
     @Override

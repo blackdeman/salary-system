@@ -1,66 +1,104 @@
 package by.dreamteam.application.controllers;
+
+import by.dreamteam.businessservices.entities.Department;
 import by.dreamteam.businessservices.entities.Report;
+import by.dreamteam.businessservices.entities.User;
+import by.dreamteam.database.CardDAO;
 import by.dreamteam.database.ReportDAO;
-import java.util.Date;
+import by.dreamteam.database.UserDAO;
+import java.io.Serializable;
+import java.math.BigInteger;
+import java.util.List;
 import javax.ejb.EJB;
+import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
 
 /**
  * @author dkaganovich
  * @version 1.0
  * @created 06-Dec-2014 3:35:02 PM
  */
-public class ReportController {
+@Named
+@ViewScoped
+public class ReportController implements Serializable {
 
-	private Report report;
-	
-        @EJB
-        ReportDAO reportDAO;
+    private Report report;
 
-	public ReportController(){
-	}
+    @EJB
+    ReportDAO reportDAO;
 
-	public void confirmReport(){
-	}
+    @EJB
+    CardDAO cardDAO;
 
-	public void createReport(){
-	}
+    @EJB
+    UserDAO userDAO;
 
-	public Report getReport(){
-		return null;
-	}
+    public Report getReport() {
+        if (report == null) {
+            report = new Report();
+            report.setDepartmentId(new Department());
+        }
+        return report;
+    }
 
-	/**
-	 * 
-	 * @param report
-	 */
-	public void selectReport(Report report){
-	}
+    public void setReport(Report report) {
+        this.report = report;
+    }
 
-	/**
-	 * 
-	 * @param department
-	 */
-	public void setDepartment(String department){
-	}
+    public List<Department> getAllDepartments() {
+        return reportDAO.getAllDepartments();
+    }
 
-	/**
-	 * 
-	 * @param endDate
-	 */
-	public void setEndDate(Date endDate){
-	}
+    public Department getCurrentUserDepartment() {
+        String username = FacesContext.getCurrentInstance().getExternalContext().getRemoteUser();
+        User user = userDAO.getUserByUsername(username);
 
-	/**
-	 * 
-	 * @param report
-	 */
-	public void setReport(Report report){
-	}
+        return user.getDepartment();
+    }
 
-	/**
-	 * 
-	 * @param startDate
-	 */
-	public void setStartDate(Date startDate){
-	}
+    public String generatePreview() {
+        Report r = getReport();
+        if (FacesContext.getCurrentInstance().getExternalContext().isUserInRole("ADMIN")) {
+            if (r.getDepartmentId().getDepartmentId() != null && r.getStartDate() != null && r.getEndDate() != null) {
+                BigInteger average = BigInteger.valueOf(cardDAO.getTimeAverageSalaryByDepartmentId(r.getDepartmentId().getDepartmentId(),
+                        r.getStartDate(), r.getEndDate()).longValue());
+                getReport().setAverageSalary(average);
+            }
+        } else if (FacesContext.getCurrentInstance().getExternalContext().isUserInRole("ACCOUNTANT")) {
+            if (r.getStartDate() != null && r.getEndDate() != null) {
+                r.getDepartmentId().setDepartmentId(getCurrentUserDepartment().getDepartmentId());
+                BigInteger average = BigInteger.valueOf(cardDAO.getTimeAverageSalaryByDepartmentId(r.getDepartmentId().getDepartmentId(),
+                        r.getStartDate(), r.getEndDate()).longValue());
+                getReport().setAverageSalary(average);
+            }
+        }
+
+        return null;
+    }
+
+    public String showPreview() {
+        Report r = getReport();
+        if (r.getAverageSalary() != null) {
+            return "The average salary for the " + reportDAO.getDepartmentById(r.getDepartmentId().getDepartmentId()).getName()
+                    + "\nby the period from " + r.getStartDate() + " to " + r.getEndDate()
+                    + " is " + r.getAverageSalary();
+        }
+
+        return null;
+    }
+
+    public String confirmReport() {
+        Report r = getReport();
+        if (r.getAverageSalary() == null) {
+            generatePreview();
+        }
+        reportDAO.saveReport(r);
+
+        return "/admin/welcome.faces?faces-redirect=true";
+    }
+
+    public String abort() {
+        return "/admin/welcome.faces?faces-redirect=true";
+    }
 }//end ReportController

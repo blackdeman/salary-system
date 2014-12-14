@@ -16,7 +16,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author Andrew
+ * @author Dmitry Kaganovich
  */
 @Embeddable
 public class CardPK implements Serializable {
