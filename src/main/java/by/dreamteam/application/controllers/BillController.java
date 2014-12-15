@@ -64,6 +64,7 @@ public class BillController implements Serializable {
     }
 
     public List<Payment> getAllPayments() {
+        payment = null;
         return paymentDAO.getPaymentsForEmployee(getSelectedEmployee());
     }
 

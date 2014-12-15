@@ -28,9 +28,13 @@ public class CardDAO extends MainDAO {
         query.setParameter("employeeId", employee.getEmployeeId());
         return new CardList(query.getResultList());
     }
-    
+
     public void addCard(Card card) {
-        em.persist(card);
+        try {
+            em.persist(card);
+        } catch (Exception ex) {
+            em.merge(card);
+        }
     }
 
     public void updateCard(Card card) {

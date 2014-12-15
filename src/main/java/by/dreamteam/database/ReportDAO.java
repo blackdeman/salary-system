@@ -1,7 +1,9 @@
 package by.dreamteam.database;
 
 import by.dreamteam.businessservices.entities.Department;
+import by.dreamteam.businessservices.entities.EmployeeList;
 import by.dreamteam.businessservices.entities.Report;
+import by.dreamteam.businessservices.entities.ReportList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.Query;
@@ -33,6 +35,11 @@ public class ReportDAO extends MainDAO {
         report.setReportId(maxId + 1);
         em.persist(report);
     }
+    
+    public ReportList getReportList() {
+        Query query = em.createNamedQuery("Report.findAll");
+        return new ReportList(query.getResultList());
+    }       
     
     public List<Department> getAllDepartments() {
         Query query = em.createNamedQuery("Department.findAll");

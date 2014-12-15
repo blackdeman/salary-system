@@ -2,6 +2,7 @@ package by.dreamteam.application.controllers;
 
 import by.dreamteam.businessservices.entities.Department;
 import by.dreamteam.businessservices.entities.Report;
+import by.dreamteam.businessservices.entities.ReportList;
 import by.dreamteam.businessservices.entities.User;
 import by.dreamteam.database.CardDAO;
 import by.dreamteam.database.ReportDAO;
@@ -24,6 +25,7 @@ import javax.inject.Named;
 public class ReportController implements Serializable {
 
     private Report report;
+    private ReportList reportList;
 
     @EJB
     ReportDAO reportDAO;
@@ -36,9 +38,16 @@ public class ReportController implements Serializable {
 
     public Report getReport() {
         if (report == null) {
-            report = new Report();           
+            report = new Report();
         }
         return report;
+    }
+
+    public ReportList getReportList() {
+        if (reportList == null) {
+            reportList = reportDAO.getReportList();
+        }
+        return reportList;
     }
 
     public void setReport(Report report) {
@@ -94,8 +103,19 @@ public class ReportController implements Serializable {
         }
         reportDAO.saveReport(r);
 
-        return "/admin/welcome.faces?faces-redirect=true";
+        return "/admin/report-print.faces?faces-redirect=true";
     }
+
+    public String printReport() {
+        Report r = getReport();
+        if (r.getDepartmentId().getName() != null && r.getStartDate() != null && r.getEndDate() != null && r.getAverageSalary() != null) {
+            return "The average salary for the " + r.getDepartmentId().getName()
+                    + "\nby the period from " + r.getStartDate() + " to " + r.getEndDate()
+                    + "\nis " + r.getAverageSalary();
+        }
+
+        return null;
+    }        
 
     public String abort() {
         return "/admin/welcome.faces?faces-redirect=true";
