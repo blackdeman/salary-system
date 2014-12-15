@@ -21,3 +21,15 @@ INSERT  INTO `employee_tbl`(`employee_id`,`surname`,`name`,`patronymic`,`address
   (3002,'surname2','name2','patronymic2','address2','post2',1,2002),
   (3003,'surname3','name3','patronymic3','address3','post3',1,2001),
   (3004,'surname4','name4','patronymic4','address4','post4',1,2002);
+
+INSERT  INTO `card_tbl`(`employee_id`,`date`,`hours`,`rate_per_hour`) VALUES
+  (3001,'2014-11-01',6,20000),
+(3001,'2014-11-02',5,20000),
+(3001,'2014-11-03',3,15000),
+(3002,'2014-11-02',7,10000),
+(3002,'2014-11-04',3,15000),
+(3002,'2014-11-15',6,20000),
+(3002,'2014-11-16',5,10000),
+(3002,'2014-11-17',6,10000),
+(3002,'2014-11-18',6,15000),
+(3002,'2014-11-19',6,20000);
