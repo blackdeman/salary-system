@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <ui:composition template="../WEB-INF/base_page.xhtml">
+        <ui:param name="title" value="Print Report" />
+        <ui:define name="content">
+            <h:form id="printReportForm">      
+                <div class="row">          
+                    <div class="col-md-12 col-sm-12">                                 
+                        <p:dataTable id="reportList" value="#{reportController.reportList.reportList}" var="rep"
+                                     selectionMode="single" selection="#{reportController.report}" rowKey="#{rep.reportId}"
+                                     rows="10"
+                                     paginator="true"
+                                     paginatorPosition="top"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="5,10,20">
+                            <p:column headerText="Name">
+                                <h:outputText value="#{rep.reportName}"/>
+                            </p:column>
+                            <p:column headerText="Initial Date">
+                                <h:outputText value="#{rep.startDate}"/>
+                            </p:column>
+                            <p:column headerText="Final Date">
+                                <h:outputText value="#{rep.endDate}"/>
+                            </p:column>
+                            <p:column headerText="Department">
+                                <h:outputText value="#{rep.departmentId.name}"/>
+                            </p:column> 
+                            <f:facet name="footer">
+                                <p:commandButton process="reportList" update=":printReportForm:reportView" value="Print" oncomplete="PF('printDlg').show()" />                                
+                            </f:facet>
+                        </p:dataTable>    
+                    </div>
+                </div>
+                <p:dialog header="Print Report" widgetVar="printDlg" minHeight="80">
+                    <h:inputTextarea id="reportView" value="#{reportController.printReport()}" cols="50" rows="5"/>
+                </p:dialog>               
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
+

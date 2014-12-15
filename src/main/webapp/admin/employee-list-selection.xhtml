@@ -13,6 +13,7 @@
                                      selectionMode="single" selection="#{cardController.employee}" rowKey="#{emp.employeeId}"
                                      rows="10"
                                      paginator="true"
+                                     paginatorPosition="top"
                                      paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                      rowsPerPageTemplate="5,10,20">
                             <p:column headerText="Surname">
@@ -39,6 +40,7 @@
                         </p:dataTable>    
                     </div>
                 </div>
+                <br />
                 <div class="row">          
                     <div class="col-md-12 col-sm-12">
                         <div class="btn-toolbar">

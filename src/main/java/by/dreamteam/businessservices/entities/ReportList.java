@@ -10,7 +10,7 @@ import java.util.List;
 public class ReportList {
 
     private final List<Report> reportList;
-
+   
     public ReportList(List<Report> reportList) {
         this.reportList = reportList;
     }
