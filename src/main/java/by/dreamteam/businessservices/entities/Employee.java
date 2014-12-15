@@ -40,6 +40,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Employee.findByPost", query = "SELECT e FROM Employee e WHERE e.post = :post"),
     @NamedQuery(name = "Employee.findByPayway", query = "SELECT e FROM Employee e WHERE e.payway = :payway")})
 public class Employee implements Serializable {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee")
+    private List<Payment> paymentList;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -200,6 +202,15 @@ public class Employee implements Serializable {
     @Override
     public String toString() {
         return "by.dreamteam.businessservices.entities.Employee[ employeeId=" + employeeId + " ]";
+    }
+
+    @XmlTransient
+    public List<Payment> getPaymentList() {
+        return paymentList;
+    }
+
+    public void setPaymentList(List<Payment> paymentList) {
+        this.paymentList = paymentList;
     }
     
 }
