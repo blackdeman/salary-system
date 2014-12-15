@@ -3,9 +3,12 @@ package by.dreamteam.application.controllers;
 import by.dreamteam.businessservices.entities.Employee;
 import by.dreamteam.database.EmployeeDAO;
 import by.dreamteam.database.PaymentDAO;
-import by.dreamteam.businessservices.entities.EmployeeList;
 import by.dreamteam.businessservices.entities.Payment;
+import by.dreamteam.businessservices.entities.PaymentPK;
 import by.dreamteam.database.CardDAO;
+import java.math.BigInteger;
+import java.util.Calendar;
+import java.util.Date;
 import javax.ejb.Schedule;
 import javax.ejb.Singleton;
 import javax.inject.Inject;
@@ -24,23 +27,34 @@ public class PayController {
     private PaymentDAO paymentDAO;
     @Inject
     private CardDAO cardDAO;
-    
-    public EmployeeList employeeList;
-
-    public PayController() {
-    }
 
     /**
      *
      * @param employee
-     * @return 
+     * @return
      */
     public Payment countPaymentForEmployee(Employee employee) {
-        return new Payment();
+        Integer id = employee.getEmployeeId();
+        
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.clear(Calendar.MINUTE);
+        cal.clear(Calendar.SECOND);
+        cal.clear(Calendar.MILLISECOND);
+//        cal.set(2014, 10, 30);
+        Date lastDay = cal.getTime();
+        
+        cal.set(Calendar.DAY_OF_MONTH, 1);
+        Date firstDay = cal.getTime();
+        return new Payment(new PaymentPK(id, lastDay),
+                BigInteger.valueOf(cardDAO.getSalaryByEmployeeId(id, firstDay, lastDay)));
     }
 
-    @Schedule(dayOfMonth="Last")
+    @Schedule(dayOfMonth = "Last")
     public void makePayments() {
-        
+        for (Employee e : employeeDAO.getEmployeeList().getList()) {
+            Payment p = countPaymentForEmployee(e);
+            paymentDAO.savePayment(p);
+        }
     }
 }//end PayController

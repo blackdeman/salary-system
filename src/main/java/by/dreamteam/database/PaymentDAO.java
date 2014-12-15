@@ -9,13 +9,13 @@ import javax.ejb.Stateless;
  * @created 06-Dec-2014 3:35:02 PM
  */
 @Stateless
-public class PaymentDAO {
+public class PaymentDAO extends MainDAO {
 
     /**
      *
      * @param payment
      */
     public void savePayment(Payment payment) {
-
+        em.persist(payment);
     }
 }//end PaymentDAO

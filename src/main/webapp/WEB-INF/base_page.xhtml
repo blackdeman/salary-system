@@ -73,16 +73,20 @@
                 <div class="col-md-3 col-sm-3">                     
                     <h3><i class="glyphicon glyphicon-briefcase"></i> Toolbox</h3>
                     <hr />
-                    <ul class="nav nav-stacked">
-                        <li><h:link outcome="report-create">
-                                <i class="glyphicon glyphicon-plus"></i> Create Report</h:link></li>
-                        <li><h:link>
-                                <i class="glyphicon glyphicon-print"></i> Print Report</h:link></li>
-                        <li><h:link outcome="employee-list-selection" rendered="#{facesContext.externalContext.isUserInRole('ACCOUNTANT')}">
-                                <i class="glyphicon glyphicon-edit"></i> Edit Card</h:link></li>
-                        <li><h:link outcome="employee-list" rendered="#{facesContext.externalContext.isUserInRole('ACCOUNTANT')}">
-                                <i class="glyphicon glyphicon-wrench"></i> Edit Employee</h:link></li>        
-                    </ul>
+                    <h:form>
+                        <ul class="nav nav-stacked">
+                            <li><h:link outcome="report-create">
+                                    <i class="glyphicon glyphicon-plus"></i> Create Report</h:link></li>
+                            <li><h:link>
+                                    <i class="glyphicon glyphicon-print"></i> Print Report</h:link></li>
+                            <li><h:link outcome="employee-list-selection" rendered="#{facesContext.externalContext.isUserInRole('ACCOUNTANT')}">
+                                    <i class="glyphicon glyphicon-edit"></i> Edit Card</h:link></li>
+                            <li><h:link outcome="employee-list" rendered="#{facesContext.externalContext.isUserInRole('ACCOUNTANT')}">
+                                    <i class="glyphicon glyphicon-wrench"></i> Edit Employee</h:link></li>
+                            <li><h:commandLink rendered="#{facesContext.externalContext.isUserInRole('ADMIN')}" action="#{billController.testMakePayments()}">
+                                    <i class="glyphicon glyphicon-usd"></i> Make a payment</h:commandLink></li>
+                        </ul>
+                    </h:form>
                     <hr />
                 </div>
                 <div class="col-md-9 col-sm-9">
