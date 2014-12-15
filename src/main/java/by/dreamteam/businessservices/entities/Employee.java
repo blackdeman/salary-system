@@ -78,6 +78,7 @@ public class Employee implements Serializable {
     private Department departmentId;
 
     public Employee() {
+        this.departmentId = new Department();
     }
 
     public Employee(Integer employeeId) {
@@ -142,6 +143,17 @@ public class Employee implements Serializable {
 
     public int getPayway() {
         return payway;
+    }
+    
+    public String getPaywayString() {
+        switch(getPayway()) {
+            case 1:
+                return "on rate";
+            case 2:
+                return "hourly";
+            default:
+                return "";
+        }
     }
 
     public void setPayway(int payway) {

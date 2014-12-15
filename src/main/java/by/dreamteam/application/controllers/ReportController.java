@@ -36,8 +36,7 @@ public class ReportController implements Serializable {
 
     public Report getReport() {
         if (report == null) {
-            report = new Report();
-            report.setDepartmentId(new Department());
+            report = new Report();           
         }
         return report;
     }

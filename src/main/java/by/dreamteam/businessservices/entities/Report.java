@@ -68,6 +68,7 @@ public class Report implements Serializable {
     private Department departmentId;
 
     public Report() {
+        this.departmentId = new Department();
     }
 
     public Report(Integer reportId) {
