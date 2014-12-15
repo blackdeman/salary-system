@@ -81,7 +81,7 @@ public class CardDAO extends MainDAO {
         if (cardList != null) {
             Integer sum = 0;
             for (Card card : cardList.getList()) {
-                sum += card.getHours() * card.getRatePerHour().intValueExact();
+                sum += card.getHours() * card.getRatePerHour().intValue();
             }
 
             return sum;
