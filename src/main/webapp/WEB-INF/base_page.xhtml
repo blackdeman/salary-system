@@ -79,9 +79,11 @@
                                     <i class="glyphicon glyphicon-plus"></i> Create Report</h:link></li>
                             <li><h:link>
                                     <i class="glyphicon glyphicon-print"></i> Print Report</h:link></li>
+                            <li><h:link outcome="employee-list-selection-for-bill" rendered="#{facesContext.externalContext.isUserInRole('ACCOUNTANT')}">
+                                    <i class="glyphicon glyphicon-print"></i> Print Bill</h:link></li>
                             <li><h:link outcome="employee-list-selection" rendered="#{facesContext.externalContext.isUserInRole('ACCOUNTANT')}">
                                     <i class="glyphicon glyphicon-edit"></i> Edit Card</h:link></li>
-                            <li><h:link outcome="employee-list" rendered="#{facesContext.externalContext.isUserInRole('ACCOUNTANT')}">
+                            <li><h:link outcome="employee-list" rendered="#{facesContext.externalContext.isUserInRole('ADMIN')}">
                                     <i class="glyphicon glyphicon-wrench"></i> Edit Employee</h:link></li>
                             <li><h:commandLink rendered="#{facesContext.externalContext.isUserInRole('ADMIN')}" action="#{billController.testMakePayments()}">
                                     <i class="glyphicon glyphicon-usd"></i> Make a payment</h:commandLink></li>

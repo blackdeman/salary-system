@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="../WEB-INF/base_page.xhtml">
+        <ui:param name="title" value="Employee Table" />
+        <ui:define name="content">
+            <h:form>      
+                <div class="row">          
+                    <div class="col-md-12 col-sm-12">                                 
+                        <p:dataTable id="employeeList" value="#{billController.allPayments}" var="pay"
+                                     selectionMode="single" selection="#{billController.payment}" rowKey="#{pay.paymentPK}"
+                                     rows="10"
+                                     paginator="true"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="5,10,20">
+                            <p:column headerText="Employee id">
+                                <h:outputText value="#{pay.paymentPK.employeeId}"/>
+                            </p:column>
+                            <p:column headerText="Date" sortBy="#{pay.paymentPK.monthYear}">
+                                <h:outputText value="#{pay.paymentPK.monthYear}">
+                                    <f:convertDateTime pattern="MM.yyyy"/>
+                                </h:outputText>
+                            </p:column>
+                            <p:column headerText="Salary for month">
+                                <h:outputText value="#{pay.salary}"/>
+                            </p:column>
+                        </p:dataTable>    
+                    </div>
+                </div>
+                <br/>         
+                <div class="row">
+                    <h:panelGroup id="preview" class="form-group">                      
+                        <h:commandLink class="btn btn-primary btn-xs pull-right" style="border: 0; border-bottom-left-radius: 0; border-bottom-right-radius: 0; background-image: none;" 
+                                       value="Preview">
+                            <f:ajax render="preview" execute="@all" />
+                        </h:commandLink>
+                        <h:inputTextarea disabled="true" class="form-control" style="border-radius: 0;" id="reportPreview" value="#{billController.showPreview()}" cols="50" rows="5"/>                         
+                    </h:panelGroup>
+                </div>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

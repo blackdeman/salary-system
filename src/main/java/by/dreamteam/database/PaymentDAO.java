@@ -1,7 +1,10 @@
 package by.dreamteam.database;
 
+import by.dreamteam.businessservices.entities.Employee;
 import by.dreamteam.businessservices.entities.Payment;
+import java.util.List;
 import javax.ejb.Stateless;
+import javax.persistence.Query;
 
 /**
  * @author Andrew
@@ -17,5 +20,11 @@ public class PaymentDAO extends MainDAO {
      */
     public void savePayment(Payment payment) {
         em.persist(payment);
+    }
+    
+    public List<Payment> getPaymentsForEmployee (Employee employee) {
+        Query q = em.createNamedQuery("Payment.findByEmployeeId");
+        q.setParameter("employeeId", employee.getEmployeeId());
+        return q.getResultList();
     }
 }//end PaymentDAO

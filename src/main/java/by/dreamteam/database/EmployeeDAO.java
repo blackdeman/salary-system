@@ -37,7 +37,7 @@ public class EmployeeDAO extends MainDAO {
      * @param department
      * @return 
      */
-    public EmployeeList getEmployeeList(String department) {
+    public EmployeeList getEmployeeList(Department department) {
         return null;
     }
     
