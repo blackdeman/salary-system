@@ -81,7 +81,7 @@ public class ReportController implements Serializable {
         if (r.getAverageSalary() != null) {
             return "The average salary for the " + reportDAO.getDepartmentById(r.getDepartmentId().getDepartmentId()).getName()
                     + "\nby the period from " + r.getStartDate() + " to " + r.getEndDate()
-                    + " is " + r.getAverageSalary();
+                    + "\nis " + r.getAverageSalary();
         }
 
         return null;

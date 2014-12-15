@@ -32,7 +32,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Card.findByEmployeeId", query = "SELECT c FROM Card c WHERE c.cardPK.employeeId = :employeeId"),
     @NamedQuery(name = "Card.findByDate", query = "SELECT c FROM Card c WHERE c.cardPK.date = :date"),
     @NamedQuery(name = "Card.findByHours", query = "SELECT c FROM Card c WHERE c.hours = :hours"),
-    @NamedQuery(name = "Card.findByRatePerHour", query = "SELECT c FROM Card c WHERE c.ratePerHour = :ratePerHour")})
+    @NamedQuery(name = "Card.findByRatePerHour", query = "SELECT c FROM Card c WHERE c.ratePerHour = :ratePerHour"),
+    @NamedQuery(name = "Card.findByPK", query = "SELECT c FROM Card c WHERE c.cardPK.employeeId = :employeeId "
+                                                                    + "and  c.cardPK.date = :date")})
 public class Card implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
@@ -50,6 +52,8 @@ public class Card implements Serializable {
     private Employee employee;
 
     public Card() {
+        this.cardPK = new CardPK();
+        this.employee = new Employee();
     }
 
     public Card(CardPK cardPK) {

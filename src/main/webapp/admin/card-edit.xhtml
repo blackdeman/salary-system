@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="../WEB-INF/base_page.xhtml">
+        <ui:param name="title" value="Employee Edit" />
+        <ui:define name="content">
+            <h:form>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="form-group">
+                            <h:outputText value="Employee Id"/>
+                            <h:inputText disabled="true" class="form-control" value="#{cardController.card.cardPK.employeeId}"/>
+                        </div>
+                        <div class="form-group">
+                            <h:outputText value="Date:   "/>
+                            <h:inputText disabled="true" rendered="#{not cardController.newCard}" class="form-control" value="#{cardController.card.cardPK.date}">
+                                <f:convertDateTime pattern="dd.MM.yyyy"/>
+                            </h:inputText>
+                            <p:calendar rendered="#{cardController.newCard}" id="date" pattern="dd.MM.yyyy" value="#{cardController.card.cardPK.date}" showOn="button" />
+                        </div>
+                        <div class="form-group">
+                            <h:outputText value="Hours"/>
+                            <h:inputText class="form-control" value="#{cardController.card.hours}"/>
+                        </div>
+                        <div class="form-group">
+                            <h:outputText value="Rate per hour"/>
+                            <h:inputText class="form-control" value="#{cardController.card.ratePerHour}"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="btn-toolbar">
+                            <h:commandButton class="btn btn-default" action="#{cardController.confrimCardChanges()}" immediate="false" value="Save"/>
+                            <h:commandButton class="btn btn-default" action="#{cardController.cancel}" immediate="true" value="Cancel"/>
+                        </div>
+                    </div>
+                </div>              
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
+
+
+

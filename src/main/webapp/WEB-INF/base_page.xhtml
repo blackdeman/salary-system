@@ -9,7 +9,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-        <title>Salary System</title>        
+        <title>Salary System</title>
 
         <ui:include src="templates/commonCSS.xhtml" />    
 
@@ -78,7 +78,7 @@
                                 <i class="glyphicon glyphicon-plus"></i> Create Report</h:link></li>
                         <li><h:link>
                                 <i class="glyphicon glyphicon-print"></i> Print Report</h:link></li>
-                        <li><h:link rendered="#{facesContext.externalContext.isUserInRole('ACCOUNTANT')}">
+                        <li><h:link outcome="employee-list-selection" rendered="#{facesContext.externalContext.isUserInRole('ACCOUNTANT')}">
                                 <i class="glyphicon glyphicon-edit"></i> Edit Card</h:link></li>
                         <li><h:link outcome="employee-list" rendered="#{facesContext.externalContext.isUserInRole('ACCOUNTANT')}">
                                 <i class="glyphicon glyphicon-wrench"></i> Edit Employee</h:link></li>        
