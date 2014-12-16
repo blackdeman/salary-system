@@ -44,6 +44,7 @@ public class EmployeeController implements Serializable {
     public Employee getEmployee() {
         if (employee == null) {
             employee = new Employee();
+            employee.setPayway(0);
         }
         return employee;
     }

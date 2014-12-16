@@ -35,8 +35,8 @@ public class BillController implements Serializable {
     @EJB
     UserDAO userDAO;
 
-    Employee selectedEmployee;
-    Payment payment;
+    private Employee selectedEmployee;
+    private Payment payment;
 
     public void getMonthAndYear() {
 
@@ -64,7 +64,6 @@ public class BillController implements Serializable {
     }
 
     public List<Payment> getAllPayments() {
-        payment = null;
         return paymentDAO.getPaymentsForEmployee(getSelectedEmployee());
     }
 

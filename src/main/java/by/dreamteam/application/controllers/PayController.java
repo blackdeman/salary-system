@@ -41,7 +41,7 @@ public class PayController {
         cal.clear(Calendar.MINUTE);
         cal.clear(Calendar.SECOND);
         cal.clear(Calendar.MILLISECOND);
-//        cal.set(2014, 10, 30);
+        cal.set(2014, 10, 30);
         Date lastDay = cal.getTime();
         
         cal.set(Calendar.DAY_OF_MONTH, 1);

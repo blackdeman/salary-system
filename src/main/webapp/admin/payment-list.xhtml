@@ -5,9 +5,9 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:composition template="../WEB-INF/base_page.xhtml">
-        <ui:param name="title" value="Employee Table" />
+        <ui:param name="title" value="Bill Table" />
         <ui:define name="content">
-            <h:form>      
+            <h:form id="billForm">      
                 <div class="row">          
                     <div class="col-md-12 col-sm-12">                                 
                         <p:dataTable id="employeeList" value="#{billController.allPayments}" var="pay"
@@ -32,13 +32,15 @@
                 </div>
                 <br/>         
                 <div class="row">
-                    <h:panelGroup id="preview" class="form-group">                      
-                        <h:commandLink class="btn btn-primary btn-xs pull-right" style="border: 0; border-bottom-left-radius: 0; border-bottom-right-radius: 0; background-image: none;" 
-                                       value="Preview">
-                            <f:ajax render="preview" execute="@all" />
-                        </h:commandLink>
-                        <h:inputTextarea disabled="true" class="form-control" style="border-radius: 0;" id="reportPreview" value="#{billController.showPreview()}" cols="50" rows="5"/>                         
-                    </h:panelGroup>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <h:panelGroup id="preview" class="form-group">                      
+                            <h:commandLink class="btn btn-primary btn-xs pull-right" style="border: 0; border-bottom-left-radius: 0; border-bottom-right-radius: 0; background-image: none;" 
+                                           value="Preview">
+                                <f:ajax render="billForm:preview" execute="@all" />
+                            </h:commandLink>
+                            <h:inputTextarea disabled="true" class="form-control" style="border-radius: 0;" id="reportPreview" value="#{billController.showPreview()}" cols="50" rows="5"/>                         
+                        </h:panelGroup>
+                    </div>
                 </div>
             </h:form>
         </ui:define>
